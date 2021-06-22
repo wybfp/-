@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #result{
+            width:200px;
+            height: 200px;
+            border: 1px solid hotpink;
+        }
+    </style>
+</head>
+<body>
+    <button>click</button>
+    <button class="cancel-btn">cancel</button>
+    <div id="result"></div>
+    <script>
+             let btnXhr=null
+            //  避免重复发送请求标识符
+             let isSending=false
+        const btn=document.getElementsByTagName('button')[0]
+        btn.onclick=function(){
+            if(isSending) btnXhr.abort()
+            btnXhr=new XMLHttpRequest()
+            btnXhr.open('GET','http://localhost:8000/serve')
+            // xhr.open('GET','http://localhost:8000/serve?a=100&b=200&c=300')
+            isSending=true
+            btnXhr.send()
+            btnXhr.onreadystatechange=function(){
+                if(btnXhr.readyState===4){
+                    isSending=false
+                    if(btnXhr.status>=200&& btnXhr.status<300){
+                        // console.log(xhr.status)
+                        // console.log(xhr.statusText)
+                        // console.log(xhr.getAllResponseHeaders())
+                        // console.log(xhr.response)
+                        // console.log(xhr.responseText)
+
+                        // console.log(result)
+                        result.innerHTML=btnXhr.response
+                    }else{
+
+                    }
+
+                }
+            }
+
+        }
+          
+        const canBtn=document.getElementsByClassName('cancel-btn')[0]
+        canBtn.onclick=function(){
+            console.log(btnXhr)
+            // 取消请求
+            btnXhr.abort()
+
+        }
+   
+        const result=document.getElementById('result')
+        result.addEventListener('mouseover',function(){
+            const xhr=new XMLHttpRequest()
+            xhr.open('POST','http://localhost:8000/serve')
+            xhr.setRequestHeader('Content-Type','application/x-www-from-urlencoded')
+            // xhr.setRequestHeader('name','sgyegd')
+            xhr.send('a=100&b=200&c=300')
+            // xhr.send('a:100&b:200&c:300')
+
+     
+            xhr.onreadystatechange=function(){
+                if( xhr.readyState==4){
+                    if( xhr.status>=200&& xhr.status<300){
+                        result.innerHTML= xhr.response
+                        
+                    }
+                }
+            }
+            // console.log('ok')
+        })
+
+        result.addEventListener('mousedown',function(){
+            const xhr=new XMLHttpRequest()
+
+            // 超时设置
+            xhr.timeout=1000
+            xhr.ontimeout=function(){
+                alert('超时重试')
+            }
+            xhr.onerror=function(){
+                alert('网络异常')
+            }
+            xhr.open('GET','http://localhost:8000/timeout')
+        
+            xhr.send()
+
+     
+            xhr.onreadystatechange=function(){
+                if(xhr.readyState==4){
+                    if(xhr.status>=200&&xhr.status<300){
+                        result.innerHTML=xhr.response
+                        
+                    }
+                }
+            }
+            // console.log('ok')
+        })
+        window.onkeydown=function(){
+            const  xhr=new XMLHttpRequest()
+            // *2*.(自动转换) 设置响应体数据的类型(自动转换)
+            xhr.responseType='json'
+            xhr.open('GET','http://127.0.0.1:8000/json-server')
+            xhr.send()
+            xhr.onreadystatechange=function(){
+                if(xhr.readyState==4){
+                    if(xhr.status>=200&&xhr.status<300){
+                        // console.log(xhr.response)
+                        // let data=JSON.parse(xhr.response)
+                        // console.log(data)
+                        // result.innerHTML=data.name
+
+                         result.innerHTML=xhr.response.name
+
+                    }
+                }
+            }
+
+        }
+      
+
+    </script>
+</body>
+</html>

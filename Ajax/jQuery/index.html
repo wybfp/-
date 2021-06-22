@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <button class="btn">get</button>
+        <button class="btn">post</button>
+        <button class="btn">通用方法</button>
+    </div>
+    <script>
+        // $('button').eq(0).click(function(){
+        //     $.get('http://localhost:8000/serve',{a:100,b:300},function(data){
+        //             console.log(data)
+        //     })
+        // })
+        $('button').eq(0).click(function(){
+            $.get('http://localhost:8000/json-server',{a:100,b:300},function(data){
+                    console.log(data)
+            },'json')
+        })
+        $('button').eq(1).click(function(){
+            $.post('http://localhost:8000/serve',{a:100,b:300},function(data){
+                    console.log(data)
+            })
+        })
+        $('button').eq(2).click(function(){
+            $.ajax({
+                url:'http://localhost:8000/json-server',
+                data:{a:100,b:300},
+                type:'GET',
+                dataType:'json',
+                success:function(data){
+                    console.log(data)
+                },
+                timeout:2000,
+                error:function(){
+                    console.log('出错啦')
+                },
+                // 头信息
+                Headers:{
+                    c:300,
+                    d:400
+                }
+            })
+        })
+    </script>
+</body>
+</html>

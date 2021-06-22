@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <button>get</button>
+    <button>post</button>
+    <button>ajax</button>
+<script>
+    const btn=document.querySelectorAll('button')
+    axios.defaults.baseURL='http://localhost:8000'
+    // console.log(axios.defaults)
+    btn[0].onclick=function(){
+        axios.get('/serve',{
+            params:{
+                id:100,
+                vip:7
+            },
+            headers:{
+                name:'zzz',
+                age:20
+            }
+        }).then(value=>console.log(value))
+    }
+    btn[1].onclick=function(){
+        axios.post('/serve',{
+                username:'admin',
+                password:'admin'
+            },{
+            params:{
+                id:100,
+                vip:7
+            },
+            headers:{
+                name:'zzz',
+                age:20
+            },
+        
+        }).then(value=>console.log(value))
+    }
+    btn[2].onclick=function(){
+        axios({
+            method:'post',
+            url:'/json-server',
+            params:{
+                id:100,
+                vip:7
+            },
+            headers:{
+                name:'zzz',
+                age:20
+            },
+            data:{
+                username:'admin',
+                password:'admin'
+            }
+        }).then(value=>console.log(value))
+    }
+</script>
+</body>
+</html>

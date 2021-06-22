@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写Promise</title>
+</head>
+<body>
+    <!-- <script src="./myPromise.js"></script> -->
+    <script src="./Promise.js"></script>
+    <script>
+    const p=new Promise((resolve,reject)=>{
+        // setTimeout(()=>{
+            //  resolve('ok')
+            reject('err')
+             console.log(111)
+            // reject("error")
+            // throw 'throw fail'
+        // },100)
+        
+    })
+  p.then(v=>{
+      console.log(222)
+  },r=>console.log(444))
+  console.log(333)
+//    p.then(value=>{
+//        console.log('111')
+     
+//         // return new Promise((resolve,reject)=>{
+//         //     // resolve('success')
+//         //     // reject('oh no')
+//         //     throw 'throw'
+//         // })
+//         throw 'throw'
+//     })
+// p.then()
+//     .then(v=>console.log('222'))
+//     .then(v=>console.log('333'))
+//     .catch(e=>console.warn('error'))
+// let p1 = new Promise((resolve, reject) => {
+//       setTimeout(() => {resolve('OK');});
+//     });
+//     let p2 = Promise.reject('Success');
+//     let p3 = Promise.resolve('Oh Yeah');
+
+// const p2=Promise.resolve('ok')
+// const p3=Promise.resolve(new Promise((resolve,reject)=>resolve("okk")))
+// const p3=Promise.reject(new Promise((resolve,reject)=>reject("bad")))
+// const p3=Promise.resolve(new Promise((resolve,reject)=>reject("bad")))
+// let res=Promise.race([p1,p2,p3])
+// console.log(res)
+ 
+    </script>
+</body>
+</html>

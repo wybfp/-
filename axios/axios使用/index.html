@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <button >GET请求</button>
+    <button >POST请求</button>
+    <button >PUT请求</button>
+    <button >DELETE请求</button>
+  </div>
+
+
+  <script>
+    const btn=document.querySelectorAll('button')
+    
+    const duanzi=axios.create({
+      baseURL:'http://poetry.apiopen.top',
+      timeout:2000
+    });
+    duanzi.get('/getTime').then(value=>console.log(value))
+  </script>
+</body>
+</html>

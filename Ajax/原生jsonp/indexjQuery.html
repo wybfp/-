@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <title>Document</title>
+    <style>
+        .result{
+           width: 200px;
+           height: 200px;
+           border: 1px solid black; 
+        }
+    </style>
+</head>
+<body>
+    <button>click</button>
+    <div class="result"></div>
+    <script>
+    $('button').eq(0).click(function(){
+        $.getJSON('http://localhost:8000/jsonp?callback=?',function(data){
+          $('.result').html(`
+          名称：${data.name}<br/>
+          地区：${data.city}
+          `)
+        })
+    })
+    </script>
+</body>
+</html>
